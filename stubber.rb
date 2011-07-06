@@ -2,8 +2,8 @@ require 'minitest/autorun'
 
 module Stubber
 
-  def stub(method, options={})
-    eigenclass_of(options[:for]).send(:define_method, method) do |*params|
+  def stub(method_name, options={})
+    eigenclass_of(options[:for]).send(:define_method, method_name) do |*params|
       options[:returns]
     end
   end

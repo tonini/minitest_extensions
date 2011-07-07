@@ -11,9 +11,7 @@ module Syntax
   end
 
   def method_exists?(name)
-    true if instance_method(name)
-  rescue
-    false
+    instance_method(name) rescue false
   end
 
 end

@@ -2,9 +2,11 @@ require 'minitest/autorun'
 
 module Stubber
 
-  def stub(method_name, options={})
-    eigenclass_of(options[:for]).send(:define_method, method_name) do |*params|
-      options[:returns]
+  def stub(object, options={})
+    options.each do |method_name, return_value|
+      eigenclass_of(object).send(:define_method, method_name) do |*params|
+        return_value
+      end
     end
   end
 
@@ -18,11 +20,21 @@ MiniTest::Unit::TestCase.send(:include, Stubber)
 
 class StubberTest < MiniTest::Unit::TestCase
 
-  def test_stub_a_new_method
-    @other_class = Class.new
+  def setup
+    @my_class = Class.new
+  end
 
-    stub(:james, :for => @other_class, :returns => "brown")
-    assert_equal @other_class.james, "brown"
+  def test_stub_a_new_method
+    stub(@my_class, :james => "brown")
+
+    assert_equal @my_class.james, "brown"
+  end
+
+  def test_stub_several_methods_for_an_object
+    stub(@my_class, :sly => "stone", :birth => 1943)
+
+    assert_equal @my_class.sly, "stone"
+    assert_equal @my_class.birth, 1943
   end
 
 end

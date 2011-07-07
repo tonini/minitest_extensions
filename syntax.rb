@@ -23,9 +23,9 @@ MiniTest::Unit::TestCase.send(:extend, Syntax)
 class SyntaxTest < MiniTest::Unit::TestCase
 
   test "the new test method syntax" do
-    warning = "fire in the whole!"
+    warning = "fire in the hole!"
 
-    assert_equal warning, "fire in the whole!"
+    assert_equal warning, "fire in the hole!"
   end
 
   test "this one should skip"

@@ -16,25 +16,25 @@ module Stubber
 
 end
 
-MiniTest::Unit::TestCase.send(:include, Stubber)
+MiniTest::Test.send(:include, Stubber)
 
-class StubberTest < MiniTest::Unit::TestCase
+class StubberTest < MiniTest::Test
 
   def setup
-    @my_class = Class.new
+    @object = Class.new
   end
 
   def test_stub_a_new_method
-    stub(@my_class, :james => "brown")
+    stub(@object, :james => "brown")
 
-    assert_equal @my_class.james, "brown"
+    assert_equal @object.james, "brown"
   end
 
   def test_stub_several_methods_for_an_object
-    stub(@my_class, :sly => "stone", :birth => 1943)
+    stub(@object, :sly => "stone", :birth => 1943)
 
-    assert_equal @my_class.sly, "stone"
-    assert_equal @my_class.birth, 1943
+    assert_equal @object.sly, "stone"
+    assert_equal @object.birth, 1943
   end
 
 end

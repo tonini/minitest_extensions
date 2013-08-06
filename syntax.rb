@@ -16,9 +16,9 @@ module Syntax
 
 end
 
-MiniTest::Unit::TestCase.send(:extend, Syntax)
+MiniTest::Test.send(:extend, Syntax)
 
-class SyntaxTest < MiniTest::Unit::TestCase
+class SyntaxTest < MiniTest::Test
 
   test "the new test method syntax" do
     warning = "fire in the hole!"
